@@ -1,45 +1,26 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>Processing...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Pay</title>
-    <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8f9fa; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .pay-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center; width: 300px; }
-        h2 { color: #333; font-size: 20px; margin-bottom: 10px; }
-        .amount { font-size: 40px; font-weight: bold; color: #000; margin: 15px 0; }
-        .amount span { font-size: 20px; margin-right: 5px; }
-        .pay-btn { background: #10b981; color: white; border: none; padding: 18px; width: 100%; border-radius: 12px; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
-        .pay-btn:active { transform: scale(0.97); }
-        .apps-text { margin-top: 15px; font-size: 12px; color: #888; letter-spacing: 0.5px; }
-    </style>
 </head>
-<body>
+<body onload="redirectToPay()">
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; color: #666;">
+        <p>Redirecting to Secure Payment...</p>
+    </div>
 
-<div class="pay-card">
-    <h2>Payment to Merchant</h2>
-    <div class="amount"><span>₹</span>500</div>
-    
-    <button class="pay-btn" onclick="directPay()">PAY NOW</button>
-    
-    <div class="apps-text">Pay via GPay, PhonePe or Paytm</div>
-</div>
-
-<script>
-    function directPay() {
-        // APNI DETAILS UPDATE KAREIN
-        const upiId = "skyadavlba@abl"; // <--- Asli ID dalein
-        const name = "Free Data";      // <--- Apna naam dalein
-        const amount = "100.00"; 
-        
-        // Standard UPI string
-        const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-        
-        // Try opening the link
-        window.location.href = upiUrl;
-    }
-</script>
-
+    <script>
+        function redirectToPay() {
+            // YAHAN APNI DETAILS UPDATE KAREIN
+            const upiId = "skyadavlba@abl"; // <--- Asli ID yahan dalein
+            const name = "Merchant";      // <--- Apna naam dalein
+            const amount = "100";         // <--- Amount yahan dalein
+            
+            const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+            
+            // Ye line turant UPI Apps ko trigger kar degi
+            window.location.href = upiLink;
+        }
+    </script>
 </body>
 </html>
