@@ -1,27 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="hi">
 <head>
-    <title>Processing...</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Gateway</title>
+    <style>
+        body { 
+            margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; 
+            background-color: #0f172a; /* Dark Professional Background */
+            display: flex; justify-content: center; align-items: center; 
+            height: 100vh; color: white;
+        }
+        .loading-box { text-align: center; }
+        
+        /* Security Shield Animation */
+        .shield {
+            width: 80px; height: 80px;
+            background: #38bdf8;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin: 0 auto 20px;
+            display: flex; justify-content: center; align-items: center;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .text { font-size: 18px; letter-spacing: 1px; font-weight: 300; color: #94a3b8; }
+        .secure-text { color: #38bdf8; font-weight: bold; margin-top: 10px; display: block; }
+    </style>
 </head>
-<body onload="redirectToPay()">
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; color: #666;">
-        <p>Redirecting to Secure Payment...</p>
+<body onload="initiateSecurePayment()">
+
+    <div class="loading-box">
+        <div class="shield">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        </div>
+        <p class="text">Connecting to Secure Gateway...</p>
+        <span class="secure-text">Encrypted Connection</span>
     </div>
 
     <script>
-        function redirectToPay() {
-            // YAHAN APNI DETAILS UPDATE KAREIN
-            const upiId = "skyadavlba@apl"; // <--- Asli ID yahan dalein
-            const name = "Merchant";      // <--- Apna naam dalein
-            const amount = "100";         // <--- Amount yahan dalein
+        function initiateSecurePayment() {
+            // Yahan apni details dalein - ye kisi ko page par nahi dikhengi
+            const upiId = "skyadavlba@apl"; 
+            const name = "Payment Service"; // Yahan kuch bhi generic naam rakh dein
+            const amount = "100"; 
             
-            const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-            
-            // Ye line turant UPI Apps ko trigger kar degi
-            window.location.href = upiLink;
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+
+            // 1.5 second ke baad auto-redirect
+            setTimeout(() => {
+                window.location.href = upiUrl;
+            }, 1500);
         }
     </script>
 </body>
-
 </html>
